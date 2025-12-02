@@ -18,21 +18,32 @@ import SwiftUI
 
 public struct PrivacyNoticeView: View {
     private let url: URL
+    private let customAction: () -> Void
 
-    public init(url: URL) {
+    public init(
+        url: URL,
+        customAction: @escaping () -> Void
+    ) {
         self.url = url
+        self.customAction = customAction
     }
 
     public var body: some View {
-        PDFKitView(url: url, backgroundColor: .white)
-            .background(Color.white)
-            .navigationTitle(.PrivacyNotice.navigationTitle)
-            .navigationBarTitleDisplayMode(.large)
+        VStack {
+            PDFKitView(url: url, backgroundColor: .white)
+                .background(Color.white)
+//                .navigationTitle(.PrivacyNotice.navigationTitle)
+//                .navigationBarTitleDisplayMode(.large)
+            Screen.links()
+            Button(action: customAction) {
+                Text("CUSTOM ACTION")
+            }
+        }
     }
 }
 
 #if DEBUG
 #Preview {
-    PrivacyNoticeView(url: URL(string: "TEST")!)
+    PrivacyNoticeView(url: URL(string: "TEST")!) {}
 }
 #endif

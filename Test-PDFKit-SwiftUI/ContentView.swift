@@ -8,23 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    var backToRoot: () -> Void
+
     var body: some View {
         let _ = Self._printChanges()
         VStack {
             let bundle = Bundle.main
             let url = bundle.url(forResource: "Privacy-Notice", withExtension: "pdf")
             if let url {
-                PrivacyNoticeLink(url: url)
+                PrivacyNoticeLink(url: url, customAction: backToRoot)
             }
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+            Screen.links()
         }
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView() {}
 }

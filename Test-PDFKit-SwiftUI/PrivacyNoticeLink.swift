@@ -9,14 +9,19 @@ import SwiftUI
 
 public struct PrivacyNoticeLink: View {
     private let url: URL
+    private let customAction: () -> Void
 
-    public init(url: URL) {
+    public init(
+        url: URL,
+        customAction: @escaping () -> Void
+    ) {
         self.url = url
+        self.customAction = customAction
     }
 
     public var body: some View {
         NavigationLink {
-            PrivacyNoticeView(url: url)
+            PrivacyNoticeView(url: url, customAction: customAction)
         } label: {
             Text(.PrivacyNotice.linkText)
                 .foregroundStyle(Color.black)
