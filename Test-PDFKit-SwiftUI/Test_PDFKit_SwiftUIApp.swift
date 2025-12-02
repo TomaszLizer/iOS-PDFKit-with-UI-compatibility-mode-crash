@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Test_PDFKit_SwiftUIApp: App {
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                ContentView()
+            }
         }
     }
 }
